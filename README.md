@@ -1,12 +1,11 @@
 # markdown-to-html-test
 
 ## Overview
-Publish a static page that converts input.md from attachments to HTML with marked, renders it inside #markdown-output, and loads highlight.js for code blocks.
+Add tabs #markdown-tabs that switch between rendered HTML in #markdown-output and the original Markdown in #markdown-source while keeping content in sync.
 
-## Requirements Checklist
-- [ ] !!document.querySelector("script[src*='marked']")
-- [ ] !!document.querySelector("script[src*='highlight.js']")
-- [ ] document.querySelector("#markdown-output").innerHTML.includes("<h")
+## Updated Requirements Checklist (Round 2)
+- [ ] document.querySelectorAll("#markdown-tabs button").length >= 2
+- [ ] document.querySelector("#markdown-source").textContent.trim().length > 0
 
 ## Setup
 1. Clone this repository:
@@ -28,7 +27,7 @@ Open the page and interact with the application. All functionality is contained 
 - `README.md` - This file
 
 ## Code Explanation
-This is a single-file HTML application auto-generated using OpenRouter LLMs via AIpipe.
+This is a single-file HTML application auto-generated and improved using OpenRouter LLMs via AIpipe.
 
 **Key Features:**
 - Fully self-contained (no build step needed)
@@ -50,4 +49,4 @@ Works in all modern browsers (Chrome, Firefox, Safari, Edge)
 MIT License - See LICENSE file for full details
 
 ---
-*Generated automatically*
+*Generated and improved automatically (Round 2)*

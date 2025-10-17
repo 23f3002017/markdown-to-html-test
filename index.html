@@ -26,6 +26,20 @@
         code {
             font-family: "Courier New", Courier, monospace;
         }
+        #markdown-tabs {
+            margin-bottom: 10px;
+        }
+        #markdown-tabs button {
+            padding: 10px;
+            cursor: pointer;
+            background: #e7e7e7;
+            border: none;
+            border-radius: 5px;
+            margin-right: 5px;
+        }
+        #markdown-tabs button.active {
+            background: #d4d4d4;
+        }
         @media (max-width: 600px) {
             body {
                 margin: 10px;
@@ -43,36 +57,43 @@
 </head>
 <body>
     <h1 id="main-title">Markdown to HTML Converter</h1>
-    <div id="markdown-output" role="main" aria-live="polite"></div>
-
+    <div id="markdown-tabs">
+        <button id="tab-markdown" class="active">Markdown</button>
+        <button id="tab-html">HTML</button>
+    </div>
+    <div id="markdown-source" contenteditable="true" placeholder="Type your markdown here..."></div>
+    <div id="markdown-output" style="display: none;"></div>
     <script>
-        // Sample markdown input
-        const markdownInput = `
-# Hello World
+        const markdownSource = document.querySelector("#markdown-source");
+        const markdownOutput = document.querySelector("#markdown-output");
+        const tabMarkdown = document.querySelector("#tab-markdown");
+        const tabHtml = document.querySelector("#tab-html");
 
-This is a test markdown file.
-
-## Subtitle
-
-Here's some **bold** and *_italic_* text.
-
-\`\`\`javascript
-console.log("Hello, World!");
-\`\`\`
-        `;
-
-        try {
-            // Convert markdown to HTML using marked
-            const htmlContent = marked(markdownInput);
-            // Insert the generated HTML into the output container
-            document.querySelector("#markdown-output").innerHTML = htmlContent;
-
-            // Highlight code blocks
-            hljs.highlightAll();
-        } catch (error) {
-            console.error("Error processing markdown:", error);
-            document.querySelector("#markdown-output").innerHTML = "<p>Error rendering markdown. Please try again later.</p>";
+        function renderMarkdown() {
+            const markdownText = markdownSource.textContent.trim();
+            markdownOutput.innerHTML = marked(markdownText);
+            highlight.js.highlightAll();
         }
+
+        markdownSource.addEventListener("input", renderMarkdown);
+
+        tabMarkdown.addEventListener("click", () => {
+            tabMarkdown.classList.add("active");
+            tabHtml.classList.remove("active");
+            markdownSource.style.display = "block";
+            markdownOutput.style.display = "none";
+        });
+
+        tabHtml.addEventListener("click", () => {
+            tabHtml.classList.add("active");
+            tabMarkdown.classList.remove("active");
+            markdownSource.style.display = "none";
+            markdownOutput.style.display = "block";
+            renderMarkdown();
+        });
+
+        // Initial render
+        renderMarkdown();
     </script>
 </body>
 </html>
