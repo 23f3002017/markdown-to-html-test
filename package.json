@@ -1,0 +1,11 @@
+{
+  "name": "markdown-to-html-test",
+  "version": "1.0.0",
+  "description": "Publish a static page that converts input.md from attachments to HTML with marked, renders it inside #markdown-output, and loads highlight.js for code blocks.",
+  "main": "index.html",
+  "scripts": {
+    "start": "python -m http.server 8000"
+  },
+  "author": "student@example.com",
+  "license": "MIT"
+}
